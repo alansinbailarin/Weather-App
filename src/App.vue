@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import HeaderComponent from "./components/Header.vue";
-import FooterComponent from "./components/Footer.vue";
+import Banner from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+import Navbar from "./components/Navbar.vue";
 import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <HeaderComponent />
+  <Banner />
+  <Navbar />
   <RouterView />
-  <FooterComponent />
+  <Footer />
 </template>
