@@ -57,6 +57,7 @@ export interface weatherDays {
         humidity: number;
         sea_level: number;
         grnd_level: number;
+        icon: string;
       };
       weather: [
         {
