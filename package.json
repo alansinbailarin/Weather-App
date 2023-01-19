@@ -12,6 +12,7 @@
   "dependencies": {
     "flowbite": "^1.6.2",
     "pinia": "^2.0.28",
+    "swiper": "^8.4.6",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },

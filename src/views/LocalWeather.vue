@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-7xl px-4 mt-12 md:grid md:grid-cols-4">
+  <div class="mx-auto max-w-7xl px-4 mt-12">
     <div class="text-center">
       <div v-if="loadingCurrent">
         <div
@@ -38,8 +38,25 @@
           alt=""
         />
       </div>
-      <div class="grid grid-cols-3 mt-10 text-gray-700 dark:text-gray-300">
+      <div
+        class="grid grid-cols-3 mt-10 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm"
+      >
         <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            fill="currentColor"
+            class="bi bi-thermometer-half mx-auto text-indigo-600 dark:text-indigo-400"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V6.5a.5.5 0 0 1 1 0v4.585a1.5 1.5 0 0 1 1 1.415z"
+            />
+            <path
+              d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"
+            />
+          </svg>
           <h1 class="font-medium text-lg">Temperatura</h1>
           <div
             v-if="loadingCurrent"
@@ -50,6 +67,18 @@
           </p>
         </div>
         <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            fill="currentColor"
+            class="bi bi-wind mx-auto text-indigo-600 dark:text-indigo-400"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z"
+            />
+          </svg>
           <h1 class="font-medium text-lg">Viento</h1>
           <div
             v-if="loadingCurrent"
@@ -61,6 +90,23 @@
         </div>
         <div>
           <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              fill="currentColor"
+              class="bi bi-droplet-half mx-auto text-indigo-600 dark:text-indigo-400"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"
+              />
+            </svg>
             <h1 class="font-medium text-lg">Humedad</h1>
             <div
               v-if="loadingCurrent"
@@ -73,15 +119,43 @@
         </div>
       </div>
     </div>
+    <div
+      class="bg-gray-100 rounded-md mt-6 p-4 dark:bg-gray-800 dark:text-gray-300"
+    >
+      asd
+    </div>
+
+    <!-- <swiper
+      :slidesPerView="4"
+      :centeredSlides="true"
+      :spaceBetween="30"
+      :grabCursor="true"
+      :pagination="{
+        clickable: true,
+      }"
+      class="mt-10 p-4 md:hidden"
+    >
+      <swiper-slide
+        class="bg-gray-100 rounded-md p-4 w-20"
+        v-for="item in dataDays.list"
+        ><p>{{ item.dt_txt }}</p></swiper-slide
+      >
+    </swiper> -->
   </div>
 </template>
 <script lang="ts">
-export default { name: "local-weather-view" };
+export default {
+  name: "local-weather-view",
+};
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted } from "vue";
 import type { weather, weatherDays } from "@/interfaces/fiveDaysWeather";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
 
 const dataByCity = ref<weather>({} as weather);
 const dataCurrent = ref<weather>({} as weather);
@@ -93,6 +167,7 @@ let loadingFiveDays = ref<boolean>(true);
 let unit = "metric";
 let city_name = "Tijuana";
 const API_key = "21a45b728b91cea07a38b918145aafc4";
+const modules = [Pagination];
 
 const getWeather = () => {
   navigator.geolocation.getCurrentPosition((position) => {
