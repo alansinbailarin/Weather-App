@@ -59,7 +59,9 @@ export default {
 </script>
 <script setup lang="ts">
 import { ref } from "vue";
+
 const bannerVisibility = ref(true);
+
 const msgDesk =
   "¡Para una mejor experiencia, es mejor abrir esta aplicación en celular!";
 const msgCel = "¡Bien hecho!";

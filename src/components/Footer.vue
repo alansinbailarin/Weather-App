@@ -1,5 +1,5 @@
 <template>
-  <footer>dist</footer>
+  <footer></footer>
 </template>
 <script lang="ts">
 export default {
