@@ -3,7 +3,7 @@
     <div class="text-center">
       <div v-if="loadingCurrent">
         <div
-          class="flex items-center justify-center h-[11.3rem] md:h-[14.5rem] mb-4 bg-gray-300 rounded dark:bg-gray-700"
+          class="flex items-center justify-center w-52 md:w-72 mx-auto h-[11.3rem] md:h-[14.5rem] mb-20 bg-gray-300 rounded dark:bg-gray-700"
         >
           <svg
             class="w-12 h-12 text-gray-200 dark:text-gray-600"
@@ -18,7 +18,10 @@
           </svg>
         </div>
       </div>
-      <div class="w-56 md:w-72 mx-auto object-center" v-else>
+      <div
+        v-else
+        class="w-56 md:w-72 md:h-[14.5rem] h-[11.3rem] mx-auto mb-20 object-center"
+      >
         <img
           v-if="dataCurrent.main?.temp < 10"
           src="../assets/images/ventoso.png"
@@ -50,7 +53,7 @@
           <h1 class="font-medium text-lg">Viento</h1>
           <div
             v-if="loadingCurrent"
-            class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mx-auto"
+            class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-22 mx-auto"
           ></div>
           <p v-else class="font-extrabold">
             {{ dataCurrent.wind?.speed + " Km/h" }}
@@ -58,7 +61,7 @@
         </div>
         <div>
           <div>
-            <h1 class="font-medium text-lg">Viento</h1>
+            <h1 class="font-medium text-lg">Humedad</h1>
             <div
               v-if="loadingCurrent"
               class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mx-auto"
@@ -157,7 +160,7 @@ const getWeather = () => {
   });
 };
 
-onMounted(() => {
-  getWeather();
+onMounted(async () => {
+  await getWeather();
 });
 </script>
