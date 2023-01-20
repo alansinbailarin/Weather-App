@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "flowbite": "^1.6.2",
+    "moment": "^2.29.4",
+    "momment": "^0.0.1",
     "pinia": "^2.0.28",
     "swiper": "^8.4.6",
     "vue": "^3.2.45",

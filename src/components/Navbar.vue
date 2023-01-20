@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="bg-white dark:bg-gray-900 dark:shadow-lg dark:border-none shadow-md"
+    class="bg-gray-100 dark:bg-gray-900 dark:shadow-lg dark:border-none shadow-md"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex p-2 items-center justify-between">
@@ -162,16 +162,12 @@ const getWeather = () => {
         loading.value = true;
         try {
           dataCurrent.value = data;
-
-          console.log(dataCurrent);
         } catch (error) {
           console.log(error);
         } finally {
           loading.value = false;
         }
       });
-
-    console.log(getCurrentWeather);
   });
 };
 

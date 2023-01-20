@@ -22,12 +22,24 @@
         v-else
         class="w-56 md:w-72 md:h-[14.5rem] h-[11.3rem] mx-auto mb-20 object-center"
       >
-        <img
-          v-if="dataCurrent.main?.temp < 10"
-          src="../assets/images/ventoso.png"
-          alt=""
-        />
-        <img
+        <div v-for="item in dataCurrent.weather">
+          <img
+            v-if="item.main === 'Clouds'"
+            src="../assets/images/two-clouds.png"
+            alt=""
+          />
+          <img
+            v-else-if="item.main === 'Clear'"
+            src="../assets/images/climacaluroso.png"
+            alt=""
+          />
+          <img
+            v-else-if="item.main === 'Rain'"
+            src="../assets/images/twoclouds-5.png"
+            alt=""
+          />
+        </div>
+        <!-- <img
           v-else-if="dataCurrent.main?.temp > 10 && dataCurrent.main?.temp < 24"
           src="../assets/images/sunny.png"
           alt=""
@@ -36,7 +48,7 @@
           v-else-if="dataCurrent.main?.temp > 24"
           src="../assets/images/climacaluroso.png"
           alt=""
-        />
+        /> -->
       </div>
       <div
         class="grid grid-cols-3 mt-10 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm"
@@ -57,7 +69,7 @@
               d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"
             />
           </svg>
-          <h1 class="font-medium text-lg">Temperatura</h1>
+          <h1 class="font-medium text-lg">Temperature</h1>
           <div
             v-if="loadingCurrent"
             class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-14 mx-auto"
@@ -79,7 +91,7 @@
               d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z"
             />
           </svg>
-          <h1 class="font-medium text-lg">Viento</h1>
+          <h1 class="font-medium text-lg">Wind</h1>
           <div
             v-if="loadingCurrent"
             class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-22 mx-auto"
@@ -107,7 +119,7 @@
                 d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"
               />
             </svg>
-            <h1 class="font-medium text-lg">Humedad</h1>
+            <h1 class="font-medium text-lg">Humidity</h1>
             <div
               v-if="loadingCurrent"
               class="h-2.5 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mx-auto"
@@ -120,7 +132,7 @@
       </div>
     </div>
     <div
-      class="bg-gray-100 dark:bg-gray-800 p-4 text-gray-700 dark:text-gray-300 mt-6 rounded-lg text-sm uppercase"
+      class="bg-white mb-6 shadow-sm dark:bg-gray-800 mx-auto text-center p-4 text-gray-700 dark:text-gray-300 mt-6 rounded-lg text-sm uppercase font-semibold"
     >
       <div class="inline-flex gap-2 items-center">
         <svg
@@ -138,21 +150,23 @@
             d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
           />
         </svg>
-        <h1>Pronóstico para los siguientes días</h1>
+        <h1>Rain forecast</h1>
       </div>
       <div
         v-for="item in dataDays.list"
         class="grid grid-cols-3 p-1 mt-3 text-center"
       >
-        <div>Fecha</div>
+        <div>
+          {{ moment(item.dt_txt).format("dddd") }}
+        </div>
         <div v-for="weather in item.weather" class="mx-auto">
           <div v-if="weather.main === 'Clear'">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="20"
+              height="20"
               fill="currentColor"
-              class="bi bi-sun-fill"
+              class="bi bi-sun-fill text-yellow-400"
               viewBox="0 0 16 16"
             >
               <path
@@ -163,10 +177,10 @@
           <div v-else-if="weather.main === 'Clouds'">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="20"
+              height="20"
               fill="currentColor"
-              class="bi bi-cloud-fill"
+              class="bi bi-cloud-fill text-gray-400"
               viewBox="0 0 16 16"
             >
               <path
@@ -177,10 +191,10 @@
           <div v-else-if="weather.main === 'Rain'">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="20"
+              height="20"
               fill="currentColor"
-              class="bi bi-cloud-rain-fill"
+              class="bi bi-cloud-rain-fill text-blue-600 dark:text-blue-500"
               viewBox="0 0 16 16"
             >
               <path
@@ -223,6 +237,8 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
+import moment from "moment";
+import { toNumber } from "@vue/shared";
 
 const dataByCity = ref<weather>({} as weather);
 const dataCurrent = ref<weather>({} as weather);
@@ -230,7 +246,6 @@ const dataDays = ref<weatherDays>({} as weatherDays);
 let loadingByCity = ref<boolean>(true);
 let loadingCurrent = ref<boolean>(true);
 let loadingFiveDays = ref<boolean>(true);
-
 let unit = "metric";
 let city_name = "Tijuana";
 const API_key = "21a45b728b91cea07a38b918145aafc4";
@@ -253,8 +268,6 @@ const getWeather = () => {
         loadingByCity.value = true;
         try {
           dataByCity.value = data;
-
-          console.log(dataByCity);
         } catch (error) {
           console.log(error);
         } finally {
@@ -270,8 +283,6 @@ const getWeather = () => {
         loadingCurrent.value = true;
         try {
           dataCurrent.value = data;
-
-          console.log(dataCurrent);
         } catch (error) {
           console.log(error);
         } finally {
@@ -287,18 +298,12 @@ const getWeather = () => {
         loadingFiveDays.value = true;
         try {
           dataDays.value = data;
-
-          console.log(dataDays);
         } catch (error) {
           console.log(error);
         } finally {
           loadingFiveDays.value = false;
         }
       });
-
-    console.log(getWeatherByCity);
-    console.log(getCurrentWeather);
-    console.log(getFiveDaysWeather);
   });
 };
 
