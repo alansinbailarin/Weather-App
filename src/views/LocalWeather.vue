@@ -30,7 +30,7 @@
           />
           <img
             v-else-if="item.main === 'Clear'"
-            src="../assets/images/climacaluroso.png"
+            src="../assets/images/sunny.png"
             alt=""
           />
           <img
@@ -226,7 +226,7 @@
 </template>
 <script lang="ts">
 export default {
-  name: "local-weather-view",
+  name: "local-weather-vieunnw",
 };
 </script>
 
